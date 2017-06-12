@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="Dots and Dashes for the Masses">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1 style="margin: 0px">
+        .&- Ecs-Dreem
+      </h1>
+    </header>
+    
+    <div id="joinDiv">
+        This is where you'll join a game. 
+        <br>
+        GameID: <input type="text"> User: <input type="text"> Passcode: <input type="text">
+    </div>
+
+    <main>
+      <canvas id="myCanvas" resize></canvas>
+    </main>
+
+    <footer>
+        v0.0.a | In development by Cavejay
+    </footer>
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js"></script>
+    <script type="text/paperscript" src="/render.paper.js"  canvas="myCanvas"></script>
+  </body>
+</html>

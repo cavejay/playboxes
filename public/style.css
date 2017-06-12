@@ -1,0 +1,42 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 0 5px 5px 0;
+}
+
+#joinDiv {
+    background-color: rgba(200,200,200,0.5);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 48px;
+    display: inline-grid;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+#view {
+  position: fixed;
+  bottom: 0;
+  height: 100vh;
+}
+
+canvas {
+  position: fixed;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+}
