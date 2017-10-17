@@ -1,9 +1,6 @@
 const Boxes = require("./lib/boxes").default;
-require("scribe-js")();
 const Cottage = require("cottage");
 const http = require("http");
-
-console = process.console;
 
 const app = new Cottage();
 
