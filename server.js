@@ -52,6 +52,7 @@ log.info("Listening on localhost:9090");
 
 // Game stuff to check if it all works
 var Game = new Boxes(4, 4, ["player1", "player2"]);
+Game.startGame();
 
 console.log(Game.showInfo());
 console.log(Game.showMap());
