@@ -7,7 +7,7 @@ const log = require("console-log-level")({
 const koa = require("koa"); // Base server
 const mount = require("koa-mount");
 const api = require("./lib/api").callback();
-// const IO = require("./lib/io");
+const IO = require("./lib/io");
 const static = require("koa-static")("./web");
 
 // inits
@@ -30,7 +30,24 @@ app.use(mount("/api", api));
 app.use(static);
 
 // Init and attach the Websocket framework
-// io(app);
+let io = new IO(app);
+// provide a way to log everything
+io.use(async (ctx, next) => {
+  const start = new Date();
+  await next();
+  const ms = new Date() - start;
+  console.log(`WS ${ms}ms`);
+});
+io.on("connection", (ctx, data) => {
+  console.log("a user connected");
+  ctx.socket.on("disconnect", function() {
+    console.log("user disconnected");
+  });
+});
+// ctx.socket.emit("ServerStatus", "Welcome");
+// ctx.socket.on(" ", function(msg) {
+//   io.broadcast("chat message", msg);
+// });
 
 app.listen(9090);
 log.info("Listening on localhost:9090");

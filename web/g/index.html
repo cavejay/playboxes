@@ -49,11 +49,26 @@
     #messages li:nth-child(odd) {
       background: #eee;
     }
+
+    #StatusMessages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #StatusMessages li {
+      padding: 5px 10px;
+    }
+
+    #StatusMessages li:nth-child(odd) {
+      background: #eee;
+    }
   </style>
 </head>
 
 <body>
   <ul id="messages"></ul>
+  <ul id="StatusMessages"></ul>
   <form action="">
     <input id="m" autocomplete="off" />
     <button>Send</button>
@@ -61,14 +76,21 @@
   <script src="/js/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
+    console.log('gameid is ' + window.location.hash)
     $(function () {
       const socket = io();
       $('form').submit(function () {
-        socket.emit('chat message', $('#m').val());
+        socket.emit('gameid' + window.location.hash, $('#m').val());
         $('#m').val('');
         return false;
       });
-      socket.on('chat message', function (msg) {
+      socket.on('ServerStatus', msg => {
+        $('#StatusMessages').append($('<li>').text(msg))
+        if (msg === 'Welcome') {
+          socket.emit('ServerStatus', "NewGame:" + window.location.hash)
+        }
+      })
+      socket.on('gameid' + window.location.hash, function (msg) {
         $('#messages').append($('<li>').text(msg));
       });
     });
