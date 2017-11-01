@@ -7,14 +7,17 @@
     "console-log-level": "^1.4.0",
     "cottage": "^3.0.1",
     "koa-socket-2": "^1.0.13",
-    "koa-static": "^4.0.1"
+    "koa-static": "^4.0.1",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1"
   },
   "devDependencies": {},
   "scripts": {
     "get-socket-client":
       "cp ./node_modules/socket.io-client/dist/socket.io.js ./web/js/socket.io.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "supervisor -s -w ./server.js,./lib -- server.js"
   },
   "repository": {
     "type": "git",

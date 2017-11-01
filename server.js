@@ -1,15 +1,21 @@
-const logger = require("console-log-level");
+const log = require("console-log-level")({
+  level: "info",
+  prefix: () => `${new Date()}::MAIN - `
+}); // Would probably like a log factory somewhere so we don't have this mess at the top of every file
 
 // Webstack
-const IO = require("koa-socket-2"); // I want to move this out too
-const koa = require("koa");
+const koa = require("koa"); // Base server
+const mount = require("koa-mount");
+const api = require("./lib/api").callback();
+// const IO = require("./lib/io");
+const static = require("koa-static")("./web");
 
 // inits
-const log = new logger({ level: "info" });
 const app = new koa();
-const io = new IO();
 
-// Webserver middleware init
+log.info("__Started__");
+
+/*** Webserver middleware init ***/
 
 // Logging middleware
 app.use(async function logging(ctx, next) {
@@ -17,14 +23,15 @@ app.use(async function logging(ctx, next) {
   await next();
 });
 
-// apply the api middleware
-app.use(require("./lib/api").callback());
-// Static file middleware. Still not sure if I just want to use caddy for this?
-app.use(require("koa-static")("./web")); // maybe use koa mount for this?
+// apply the API middleware to the api endpoint.
+app.use(mount("/api", api));
 
-// should apply the io stuff to a new koa instance that gets attached to the master one and mounted on /g or something.
+// apply the Static file middleware. Still not sure if I just want to use caddy for this?
+app.use(static);
 
-// start server
+// Init and attach the Websocket framework
+// io(app);
+
 app.listen(9090);
 log.info("Listening on localhost:9090");
 

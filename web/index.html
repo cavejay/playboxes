@@ -31,9 +31,11 @@
     setTimeout(function () {
       // This is where we should grab a id from the server and then go there.
       fetch('/api/newgame').then(res => {
-        console.log(res);
+        return res.text()
+      }).then(function (a) {
+        console.log(a);
+        window.location.href = "/g#" + a
       })
-      // window.location.href = "/g/"
     }
       , 3000);
   </script>
