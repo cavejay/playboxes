@@ -62,3 +62,6 @@ caddy.exe
 
 # nedb data file
 .data.db
+
+# This is a backup folder
+lib.1

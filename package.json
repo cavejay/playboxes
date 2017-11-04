@@ -8,6 +8,7 @@
     "cottage": "^3.0.1",
     "koa-socket-2": "^1.0.13",
     "koa-static": "^4.0.1",
+    "moment": "^2.19.1",
     "nedb": "^1.8.0",
     "nedb-promise": "^2.0.1",
     "singleton-class": "^1.0.4"
