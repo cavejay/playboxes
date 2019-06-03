@@ -1,0 +1,6 @@
+node_modules
+
+lib.1
+*.log
+*.exe
+
