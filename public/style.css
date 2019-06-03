@@ -3,6 +3,7 @@ header {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  background-color: rgba(255, 255, 255);
 }
 
 footer {
@@ -13,15 +14,15 @@ footer {
 }
 
 #joinDiv {
-    background-color: rgba(200,200,200,0.5);
-    margin-left: 50%;
-    transform: translateX(-50%);
-    margin-top: 48px;
-    display: inline-grid;
+  background-color: rgb(200, 200, 200);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 48px;
+  display: inline-grid;
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -34,7 +35,7 @@ body {
   height: 100vh;
 }
 
-canvas {
+#renderer {
   position: fixed;
   bottom: 0;
   height: 100vh;

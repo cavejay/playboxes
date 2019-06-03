@@ -12,7 +12,6 @@ Point.prototype.setSide  = function (update) {
   this.b = update.b || this.b;
   this.l = update.l || this.l;
   this.r = update.r || this.r;
-  
 }
 
 Point.prototype.setPos = function (x,y) {
@@ -76,5 +75,5 @@ Boxes.prototype.updatePoint = function updatePoint () {
 }
 
 var Box1 = new Boxes(50,50);
-Box1.initialiseBoard(2,2);
+Box1.initialiseBoard(50,50);
 
