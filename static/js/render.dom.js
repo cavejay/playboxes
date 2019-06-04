@@ -148,4 +148,4 @@ function dragElement(elmnt) {
   }
 }
 
-element.innerHTML = makeGrid(20, 20);
+element.innerHTML = makeGrid(10, 10);

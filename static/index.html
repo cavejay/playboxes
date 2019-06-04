@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!--Import materialize.css-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="css/materialize.min.css"
+      media="screen,projection"
+    />
+    <link rel="stylesheet" href="/css/gamestyle.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="center brand-logo">playboxes</a>
+      </div>
+    </nav>
+
+    <main id="gamespace" class="noselect"></main>
+
+    <!-- <div class="valign-wrapper center-align" style="width: 100%; height: 100%; margin-top: -64px">
+    <h5 style="width: 100%">Redirecting you to a 2 player game</h5>
+  </div> -->
+
+    <footer>
+      v0.0.a | In development by Cavejay
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+    ></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+      // // This is where we redirect to the thing
+      // setTimeout(function () {
+      //   // This is where we should grab a id from the server and then go there.
+      //   fetch('/api/newgame').then(res => {
+      //     return res.text()
+      //   }).then(function (a) {
+      //     console.log(a);
+      //     window.location.href = "/g#" + a
+      //   })
+      // }
+      //   , 3000);
+    </script>
+    <script type="text/javascript" src="/js/render.dom.js"></script>
+  </body>
+</html>
