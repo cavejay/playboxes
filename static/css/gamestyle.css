@@ -42,14 +42,12 @@ main {
   color: red;
 }
 
-.hlineInvs:hover,
-.vlineInvs:hover {
+.invisibleLine:hover {
   opacity: 1;
   font-weight: 900;
 }
 
-.hlineInvs,
-.vlineInvs {
+.invisibleLine {
   opacity: 0;
   font-weight: 900;
 }

@@ -13,9 +13,9 @@ function newDot(id) {
     ')">•</span>'
   );
 }
-function vline(from, to) {
+function vline(from, to, visible) {
   return (
-    '<span class="vlineInvs" id="' +
+    `<span class="vline ${visible ? "" : "invisibleLine"}" id="` +
     from +
     "_" +
     to +
@@ -28,9 +28,9 @@ function vline(from, to) {
     ')">|</span>'
   );
 }
-function hline(from, to) {
+function hline(from, to, visible) {
   return (
-    '<span class="hlineInvs" id="' +
+    `<span class="hline ${visible ? "" : "invisibleLine"}" id="` +
     from +
     "_" +
     to +
@@ -47,7 +47,7 @@ function hline(from, to) {
 let vlineF = '<span class="vline">|</span>';
 let hlineF = '<span class="hline">—</span>';
 
-function square(id) {
+function square(id, val) {
   return (
     '<span class="box" id="' +
     id +
@@ -55,7 +55,7 @@ function square(id) {
     "'" +
     id +
     "'" +
-    ')"> </span>'
+    `)">${val && val != "!" ? val[0] : " "}</span>`
   );
 }
 
@@ -79,7 +79,10 @@ function lineClick(from, to) {
   let line = document.getElementById(from + "_" + to);
   line.setAttribute("class", "hline");
 }
+
 function makeGrid(width, height) {
+  width++;
+  height++;
   let ret = "";
   for (let i = 0; i < height * 2; i++) {
     if (i % 2 == 0) {
@@ -96,9 +99,7 @@ function makeGrid(width, height) {
         let dcoord = Math.floor(i / 2) + "-" + j;
         ret += vline(dcoord, Math.floor(i / 2) + 1 + "-" + j);
         if (j < width - 1) {
-          ret += square(
-            "sqr" + Math.floor(Math.random() * Math.random() * 99990)
-          );
+          ret += square("sqrd" + dcoord);
         }
       }
     }
@@ -148,4 +149,79 @@ function dragElement(elmnt) {
   }
 }
 
-element.innerHTML = makeGrid(10, 10);
+element.innerHTML = makeGrid(2, 2);
+
+/**
+ * Steps
+ *
+ * Data representation
+ * Update + export data
+ * Create from data representation
+ *
+ */
+
+// '22 ?? ?!?!? ?? ?!?!? ??'
+function simpleEmptyGrid(side) {
+  let r = `${side}${side}`;
+  let d = [];
+  for (let i = 0; i < side * 2 + 1; i++) {
+    d.push(
+      i % 2
+        ? new Array(side * 2 + 1)
+            .fill("?")
+            .map((e, i) => (i % 2 ? "!" : e))
+            .join("")
+        : new Array(side + 1).join("?")
+    );
+  }
+  return r + d.join("|");
+}
+
+let gridstr = simpleEmptyGrid(9);
+console.log(gridstr);
+
+// ?? ?!?!? ?? ?!?!? ??
+function gridFromString(str) {
+  let width = str[0];
+  let height = str[1];
+  let data = str.slice(2).split("|");
+
+  let ret = "";
+  for (let i = 0; i <= height * 2 + 1; i++) {
+    if (i % 2 == 0) {
+      // horizontal Line render (no boxes)
+      for (let j = 0; j <= width; j++) {
+        let dcoord = Math.floor(i / 2) + "-" + j;
+        ret += newDot(dcoord);
+        if (j <= width - 1) {
+          ret += hline(
+            dcoord,
+            Math.floor(i / 2) + "-" + (j + 1),
+            data[i][j] != "?"
+          );
+        }
+      }
+    } else {
+      // vertical + bo line render
+      if (i > height * 2 - 1) break;
+      for (let j = 0; j <= width * 2 + 1; j++) {
+        let dcoord = Math.floor(i / 2) + "-" + j;
+        if (j % 2 == 0) {
+          ret += vline(
+            dcoord,
+            Math.floor(i / 2) + 1 + "-" + j,
+            data[i][j] != "?"
+          );
+        } else {
+          ret += square("sqr" + dcoord, data[i][j]);
+        }
+      }
+    }
+    ret += "<br>";
+  }
+  return ret;
+}
+
+let g2 = "22?m|?!?!?|??|m!?!?|??";
+
+element.innerHTML = gridFromString(gridstr);
