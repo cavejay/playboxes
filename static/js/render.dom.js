@@ -192,11 +192,11 @@ function gridFromString(str) {
       // vertical + bo line render
       if (i > height * 2 - 1) break;
       for (let j = 0; j <= width * 2 + 1; j++) {
-        let dcoord = Math.floor(i / 2) + "-" + j;
+        let dcoord = Math.floor(i / 2) + "-" + j / 2;
         if (j % 2 == 0) {
           ret += vline(
             dcoord,
-            Math.floor(i / 2) + 1 + "-" + j,
+            Math.floor(i / 2) + 1 + "-" + j / 2,
             data[i][j] != "?"
           );
         } else {
@@ -209,7 +209,8 @@ function gridFromString(str) {
   return ret;
 }
 
-let g2 = "22?m|?!?!?|??|m!?!?|??";
+let g2 = "22??|?!?!?|??|?!?!?|??";
+console.log(g2);
 
 function drawGame(gridstr) {
   let element = document.getElementById("gamespace");
@@ -218,13 +219,13 @@ function drawGame(gridstr) {
 
 // drawGame(g2);
 
-function lineClick(from, to) {
-  console.log(from + " " + to);
-  let o = "horizontal";
-  if (from.split("-")[0] != to.split("-")[0]) {
-    o = "vertical";
-  }
-  console.log(o);
-  let line = document.getElementById(from + "_" + to);
-  line.setAttribute("class", "hline");
-}
+// function lineClick(from, to) {
+//   console.log(from + " " + to);
+//   let o = "horizontal";
+//   if (from.split("-")[0] != to.split("-")[0]) {
+//     o = "vertical";
+//   }
+//   console.log(o);
+//   let line = document.getElementById(from + "_" + to);
+//   line.setAttribute("class", "hline");
+// }

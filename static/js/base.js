@@ -56,7 +56,16 @@ Boxes.prototype.initialiseBoard = function initialiseBoard(len, wid) {
   return this;
 };
 
-Boxes.prototype.updateLine = function updateLine(start, direction) {};
+Boxes.prototype.updateLine = function updateLine(start, direction) {
+  console.log("updating line: ", start, direction);
+  if (direction == "h") {
+    this.boardArray[start.y][start.x].setHline(1);
+  } else {
+    this.boardArray[start.y][start.x].setVline(1);
+  }
+
+  // console.log(this.boardArray);
+};
 
 Boxes.prototype.strImport = function strImport() {};
 
@@ -69,19 +78,20 @@ Boxes.prototype.strExport = function strExport() {
       this.boardArray[i]
         .map((e, i) => {
           if (e.hline != -1) {
-            return "?";
+            return e.hline == 0 ? "?" : e.hline;
           }
         })
         .join("")
     );
+
     d.push(
       this.boardArray[i]
         .map((e, i) => {
           let s = "";
           if (e.vline != -1) {
-            s += "?";
+            s += e.vline == 0 ? "?" : e.vline;
             if (e.hline != -1) {
-              s += "!";
+              s += e.value == 0 ? "!" : e.value;
             }
           }
           // s += e.vline != -1 || e.hline != -1 ? "" : "!";
@@ -90,14 +100,17 @@ Boxes.prototype.strExport = function strExport() {
         .join("")
     );
   }
-
   console.log(d);
-  return r + d.join("|");
+
+  let output = r + d.slice(0, -1).join("|");
+
+  console.log(output);
+  return output;
 };
 
 Boxes.prototype.validateBoard = function validateBoard() {};
 
-var Box1 = new Boxes().initialiseBoard(2, 2);
+var Box1 = new Boxes().initialiseBoard(9, 9);
 
 function lineClick(from, to) {
   console.log(from + " " + to);
@@ -106,8 +119,10 @@ function lineClick(from, to) {
     o = "vertical";
   }
 
-  let p = new Point(from.split("-")[0], from.split("-")[1]);
+  let p = new Point(from.split("-")[1] / 1, from.split("-")[0] / 1);
   Box1.updateLine(p, o[0]);
+
+  drawGame(Box1.strExport());
 }
 
 drawGame(Box1.strExport());
