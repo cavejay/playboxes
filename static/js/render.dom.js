@@ -43,10 +43,6 @@ function hline(from, to, visible) {
     ')">—</span>'
   );
 }
-
-let vlineF = '<span class="vline">|</span>';
-let hlineF = '<span class="hline">—</span>';
-
 function square(id, val) {
   return (
     '<span class="box" id="' +
@@ -58,26 +54,18 @@ function square(id, val) {
     `)">${val && val != "!" ? val[0] : " "}</span>`
   );
 }
+let vlineF = '<span class="vline">|</span>';
+let hlineF = '<span class="hline">—</span>';
 
 function dotClick(id) {
   console.log(id);
 }
 
 function fillBox(id) {
+  return;
   let b = document.getElementById(id);
   b.setAttribute("class", "boxFill");
   console.log("filled box " + id);
-}
-
-function lineClick(from, to) {
-  console.log(from + " " + to);
-  let o = "horizontal";
-  if (from.split("-")[0] != to.split("-")[0]) {
-    o = "vertical";
-  }
-  console.log(o);
-  let line = document.getElementById(from + "_" + to);
-  line.setAttribute("class", "hline");
 }
 
 function makeGrid(width, height) {
@@ -109,7 +97,6 @@ function makeGrid(width, height) {
 }
 
 // Make the DIV element draggable:
-dragElement(document.getElementById("gamespace"));
 
 function dragElement(elmnt) {
   var pos1 = 0,
@@ -149,7 +136,7 @@ function dragElement(elmnt) {
   }
 }
 
-element.innerHTML = makeGrid(2, 2);
+dragElement(document.getElementById("gamespace"));
 
 /**
  * Steps
@@ -224,4 +211,20 @@ function gridFromString(str) {
 
 let g2 = "22?m|?!?!?|??|m!?!?|??";
 
-element.innerHTML = gridFromString(gridstr);
+function drawGame(gridstr) {
+  let element = document.getElementById("gamespace");
+  element.innerHTML = gridFromString(gridstr);
+}
+
+// drawGame(g2);
+
+function lineClick(from, to) {
+  console.log(from + " " + to);
+  let o = "horizontal";
+  if (from.split("-")[0] != to.split("-")[0]) {
+    o = "vertical";
+  }
+  console.log(o);
+  let line = document.getElementById(from + "_" + to);
+  line.setAttribute("class", "hline");
+}

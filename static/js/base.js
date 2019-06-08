@@ -1,79 +1,113 @@
-function Point (x,y) {
-  this.t = 0;
-  this.b = 0;
-  this.l = 0;
-  this.r = 0;
+function Point(x, y) {
   this.x = x;
   this.y = y;
 }
 
-Point.prototype.setSide  = function (update) {
-  this.t = update.t || this.t;
-  this.b = update.b || this.b;
-  this.l = update.l || this.l;
-  this.r = update.r || this.r;
-}
-
-Point.prototype.setPos = function (x,y) {
+function Corner(x, y) {
+  this.vline = 0;
+  this.hline = 0;
+  this.value = 0;
   this.x = x;
   this.y = y;
 }
 
-Point.prototype.getPos = function () {
-  return {x: this.x, y: this.y};
-}
+Corner.prototype.setVline = function(vLine) {
+  this.vline = vLine || this.vline;
+};
 
-// Should I make it a linked grid? or just an array of arrays? 
+Corner.prototype.setHline = function(hLine) {
+  this.hline = hLine || this.hline;
+};
 
-
-
-function Boxes (x,y,dist) { 
+Corner.prototype.setPos = function(x, y) {
   this.x = x;
   this.y = y;
-  this.r = dist || 30;
+};
+
+Corner.prototype.getPos = function() {
+  return { x: this.x, y: this.y };
+};
+
+function Boxes(len, wid) {
+  this.len = len;
+  this.wid = wid;
   this.boardArray = [];
 }
 
-Boxes.prototype.initialiseBoard = function initialiseBoard (len, wid) {
+Boxes.prototype.initialiseBoard = function initialiseBoard(len, wid) {
   this.len = len;
   this.wid = wid;
-  
-  var t = [];
-  for (var i = 0; i <= wid; i++) {
-    t.push('')
-  }
-  
-  for (var i = 0; i <= len; i++) {
-    this.boardArray.push(t.slice(0));
-  }
 
   for (var i = 0; i <= len; i++) {
+    let row = [];
     for (var j = 0; j <= wid; j++) {
-      var tx = this.x+this.r*i;
-      var ty = this.y+this.r*j;
-      this.boardArray[i][j] = new Point(tx, ty);
+      let p = new Corner(j, i);
+      if (j == wid) {
+        p.setHline(-1);
+      }
+      if (i == len) {
+        p.setVline(-1);
+      }
+      row.push(p);
     }
+    this.boardArray.push(row);
   }
 
   return this;
+};
+
+Boxes.prototype.updateLine = function updateLine(start, direction) {};
+
+Boxes.prototype.strImport = function strImport() {};
+
+Boxes.prototype.strExport = function strExport() {
+  let r = `${this.wid}${this.len}`;
+  let d = [];
+
+  for (let i = 0; i <= this.len; i++) {
+    d.push(
+      this.boardArray[i]
+        .map((e, i) => {
+          if (e.hline != -1) {
+            return "?";
+          }
+        })
+        .join("")
+    );
+    d.push(
+      this.boardArray[i]
+        .map((e, i) => {
+          let s = "";
+          if (e.vline != -1) {
+            s += "?";
+            if (e.hline != -1) {
+              s += "!";
+            }
+          }
+          // s += e.vline != -1 || e.hline != -1 ? "" : "!";
+          return s;
+        })
+        .join("")
+    );
+  }
+
+  console.log(d);
+  return r + d.join("|");
+};
+
+Boxes.prototype.validateBoard = function validateBoard() {};
+
+var Box1 = new Boxes().initialiseBoard(2, 2);
+
+function lineClick(from, to) {
+  console.log(from + " " + to);
+  let o = "horizontal";
+  if (from.split("-")[0] != to.split("-")[0]) {
+    o = "vertical";
+  }
+
+  let p = new Point(from.split("-")[0], from.split("-")[1]);
+  Box1.updateLine(p, o[0]);
 }
 
-Boxes.prototype.validateBoard = function validateBoard () {
-  
-}
-
-Boxes.prototype.setBoard = function setBoard (boardArray) {
-  
-}
-
-Boxes.prototype.getBoard = function getBoard () {
-  
-}
-
-Boxes.prototype.updatePoint = function updatePoint () {
-  
-}
-
-var Box1 = new Boxes(50,50);
-Box1.initialiseBoard(50,50);
-
+drawGame(Box1.strExport());
