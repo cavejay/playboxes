@@ -70,7 +70,7 @@ Boxes.prototype.updateLine = function updateLine(start, direction) {
 Boxes.prototype.strImport = function strImport() {};
 
 Boxes.prototype.strExport = function strExport() {
-  let r = `${this.wid}${this.len}`;
+  let r = `${this.wid}.${this.len}|`;
   let d = [];
 
   for (let i = 0; i <= this.len; i++) {
@@ -108,9 +108,27 @@ Boxes.prototype.strExport = function strExport() {
   return output;
 };
 
+Boxes.prototype.fillSquares = function fillSquares() {
+  for (let i = 0; i < this.len; i++) {
+    for (let j = 0; j < this.wid; j++) {
+      let currentBox = this.boardArray[i][j];
+      let lhBox = this.boardArray[i][j + 1];
+      let blwBox = this.boardArray[i + 1][j];
+      if (
+        currentBox.vline != 0 &&
+        currentBox.hline != 0 &&
+        lhBox.vline != 0 &&
+        blwBox.hline != 0
+      ) {
+        currentBox.value = "F";
+      }
+    }
+  }
+};
+
 Boxes.prototype.validateBoard = function validateBoard() {};
 
-var Box1 = new Boxes().initialiseBoard(9, 9);
+var Box1 = new Boxes().initialiseBoard(2, 2);
 
 function lineClick(from, to) {
   console.log(from + " " + to);
@@ -121,6 +139,7 @@ function lineClick(from, to) {
 
   let p = new Point(from.split("-")[1] / 1, from.split("-")[0] / 1);
   Box1.updateLine(p, o[0]);
+  Box1.fillSquares();
 
   drawGame(Box1.strExport());
 }

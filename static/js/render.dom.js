@@ -147,9 +147,9 @@ dragElement(document.getElementById("gamespace"));
  *
  */
 
-// '22 ?? ?!?!? ?? ?!?!? ??'
+// '2.2 ?? ?!?!? ?? ?!?!? ??'
 function simpleEmptyGrid(side) {
-  let r = `${side}${side}`;
+  let r = `${side}.${side}|`;
   let d = [];
   for (let i = 0; i < side * 2 + 1; i++) {
     d.push(
@@ -169,9 +169,11 @@ console.log(gridstr);
 
 // ?? ?!?!? ?? ?!?!? ??
 function gridFromString(str) {
-  let width = str[0];
-  let height = str[1];
-  let data = str.slice(2).split("|");
+  let sizes = str.split("|")[0].split(".");
+  let width = sizes[0];
+  let height = sizes[1];
+
+  let data = str.split("|").slice(1);
 
   let ret = "";
   for (let i = 0; i <= height * 2 + 1; i++) {
