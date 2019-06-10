@@ -15,3 +15,5 @@ We're using a great DOM view for now, but Future Libraries to test:
 [ ] Play a simple 1 player game
 [ ] Proper multiplayer game flow
 [ ] Basic Functional UI
+
+## Thoughts

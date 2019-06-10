@@ -7,13 +7,11 @@
     "console-log-level": "^1.4.0",
     "cottage": "^3.0.1",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
     "koa-socket-2": "^1.0.13",
     "koa-static": "^4.0.1",
     "moment": "^2.19.1",
     "nedb": "^1.8.0",
     "nedb-promise": "^2.0.1",
-    "riot": "^4.0.8",
     "singleton-class": "^1.0.4"
   },
   "devDependencies": {},

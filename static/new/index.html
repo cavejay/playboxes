@@ -12,7 +12,8 @@
       href="css/materialize.min.css"
       media="screen,projection"
     />
-    <link rel="stylesheet" href="/css/index.page.css" />
+    <link rel="stylesheet" href="/css/gamestyle.css" />
+    <link rel="stylesheet" href="/css/page.new.css" />
 
     <!--Let browser know website is optimized for mobile-->
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
@@ -51,30 +52,18 @@
     </nav>
 
     <div id="joinDiv">
-      <h2>What is this?</h2>
-      <p>
-        'Boxes' or 'Dots and Dashes' is a game of strategy played by many around
-        the world with pen and paper!
-      </p>
-      <p>
-        playboxes is a site for to take this online, keeping friends in touch
-        and using the digital platform to make game boards larger than ever!
-      </p>
+      <h2>
+        New Game
+      </h2>
       <br />
-      <p>
-        Only the owner of a game <i>needs</i> an account, so start a game now
-        and send invites
-      </p>
-      <br />
-      <div>
-        <a href="/new" class="btn" style="float: left; margin-right: 1em">
-          New Game
-        </a>
-        <a href="/user/continue" class="btn">Continue</a>
-      </div>
+      <form>
+        Game name <br />
+        Size <br />
+        Invite link<br />
+        IMport <br />
+        <button class="btn" type="submit">Start Game</button>
+      </form>
     </div>
-    <!-- 
-    <main id="gamespace" class="noselect"></main> -->
 
     <footer>
       v0.0.a | In development by Cavejay
@@ -86,7 +75,6 @@
       src="https://code.jquery.com/jquery-3.2.1.min.js"
     ></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="/js/base.js"></script>
-    <script type="text/javascript" src="/js/page.index.js"></script>
+    <script type="text/javascript" src="/js/page.new.js"></script>
   </body>
 </html>
