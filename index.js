@@ -4,7 +4,7 @@ const log = require("./lib/logFactory").newLog("MAIN");
 const koa = require("koa"); // Base server
 const mount = require("koa-mount");
 // const api = require("./lib/api").callback();
-const IO = require("./lib/io");
+// const IO = require("./lib/io");
 const static = require("koa-static")("./static");
 
 // inits

@@ -12,3 +12,6 @@ caddy.exe
 
 # This is a backup folder
 lib.1
+
+dist
+.cache
